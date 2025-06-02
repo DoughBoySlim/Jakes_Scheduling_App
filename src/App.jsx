@@ -12,15 +12,21 @@ function App() {
         <h1 className="text-3xl/25 text-center ">Welcome To The Jake's Scheduling Application</h1>
       </div>
       
-      <div className='static'>
-        <div class="inline-block top-0">
+      <div className='flex flex-row p-[2rem]'>
+        <div class="basis-1/2 h-3/4">
           <img src={reactLogo} alt='JakesLogo'></img>
         </div>
-        <div className='absolute inline-block'>
-          <h1 class="text-5x1 font-bold center"> Sign In </h1>
-          <h3> Username </h3>
-          <h3> Password </h3>
-          <button className='Submit'>Submit</button>
+        <div className='basis-1/2 flex flex-col p-10 my-[6rem] '>
+          <h1 class="text-4xl text-center text-[#fc0301] font-display"> Sign In </h1>
+          <div className='flex flex-col items-start'>
+            <h3 className='text-md pt-5 font-display'> Username </h3>
+            <input className="bg-[#ad4c4c] rounded-sm w-full"></input>
+          </div>
+          <div className='flex flex-col items-start'>
+            <h3 className="text-md pt-2 font-display"> Password </h3>
+            <input className="bg-[#ad4c4c] rounded-sm w-full "></input>
+          </div>
+          <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display'>Submit</button>
         </div>
       </div>
       </main>

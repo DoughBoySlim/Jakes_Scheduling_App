@@ -3,12 +3,6 @@
 @font-face {
   font-family: "InkNutAntiqua";
   src: url(./fonts/InknutAntiqua-Regular.ttf);
-  src: url(./fonts/InknutAntiqua-Bold.ttf) format('ttf'),
-       url(./fonts/InknutAntiqua-ExtraBold.ttf),
-       url(./fonts/InknutAntiqua-Light.ttf),
-       url(./fonts/InknutAntiqua-Medium.ttf),
-       url(./fonts/InknutAntiqua-Black.ttf),
-       url(./fonts/InknutAntiqua-SemiBold.ttf);
   font-weight: normal;
   font-style: normal;
       
