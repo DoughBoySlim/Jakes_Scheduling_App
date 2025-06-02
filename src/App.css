@@ -14,18 +14,13 @@
       
 }
 
+@theme {
+  --font-display: "InkNutAntiqua", "TimesNewRoman"
+}
 
 .sign-up-header {
   width: 100%;
   background-color: #ad4c4c;
   color: white;
-  text-align: center;
-  font-family: "InkNutAntiqua";
-  
-  
-}
-
-.logo {
-  position: fixed;
-
+  font-family: "InkNutAntiqua"; 
 }
