@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import supabase from './config/supabaseClient'
 import reactLogo from './assets/JakesLogo_Revamped.png'
 import './App.css'
 
 function App() {
-
+  
   return (
     <>
     <div className='min-h-screen flex flex-col'>
@@ -13,7 +13,7 @@ function App() {
       </div>
       
       <div className='flex flex-row p-[2rem]'>
-        <div class="basis-1/2 h-3/4">
+        <div className="basis-1/2 h-3/4">
           <img src={reactLogo} alt='JakesLogo'></img>
         </div>
         <div className='basis-1/2 flex flex-col p-10 my-[6rem] '>
@@ -38,7 +38,7 @@ function App() {
       </footer>
     </div>
 
-
+    
     </>
   )
 }
