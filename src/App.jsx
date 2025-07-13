@@ -1,10 +1,11 @@
 import supabase from './config/supabaseClient'
 import { useState } from 'react'
 import reactLogo from './assets/JakesLogo_Revamped.png'
-import EmployeeHome from './EmployeeHome.jsx'
+import EmployeeHome from './components/EmployeeHome.jsx'
 import './App.css'
 
 function App() {
+  
   
   const [loggedIn, setLoggedin] = useState(false);
 
