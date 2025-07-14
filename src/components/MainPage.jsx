@@ -1,5 +1,6 @@
 import supabase from '../config/supabaseClient'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import reactLogo from '../assets/JakesLogo_Revamped.png'
 import EmployeeHome from './EmployeeHome.jsx'
 import ManagerHome from './ManagerHome.jsx'
@@ -11,14 +12,28 @@ function MainPage() {
     const [email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const[errorMessage, setErrorMessage] = useState('');
-    const[userRole, setUserRole] = useState('');
+    const navigate = useNavigate();
     
     async function onSubmitPress() {
+
+        // Quality of Life Test to see if fields are empty
+        if(email == '' && password == '') {
+            setErrorMessage('please fill in your username and password');
+            return;
+        }
+        else if(email == '') {
+            setErrorMessage('please fill in a username');
+            return;
+        } 
+        else if(password == '') {
+            setErrorMessage('please fill in a password');
+            return;
+        }
+
         const { data, error } = await signIn(email, password);
 
         if(error) {
             setErrorMessage(error.message);
-            alert(error);
         }
         else {
             const { data: managerData, error: managerError} = await isManager(email);
@@ -27,10 +42,11 @@ function MainPage() {
             }
             else {
                 if(managerData && managerData.isManager) {
-                    setUserRole('manager');
+                    navigate('/manager-home');
+
                 }
                 else {
-                    setUserRole('employee');
+                    navigate('/employee-home');
                 }
             }
         }
@@ -60,9 +76,6 @@ function MainPage() {
       <>
       <div className='min-h-screen flex flex-col'>
         <main className='flex-grow'>
-            {/* Go to the users respective page */}
-            {userRole === 'manager' && <ManagerHome/>}
-            {userRole === 'employee' && <EmployeeHome/>}
         <div className="w-full bg-[#ad4c4c] text-[white] py-1 font-display">
           <h1 className="text-3xl/25 text-center ">Welcome To The Jake's Scheduling Application</h1>
         </div>
@@ -80,6 +93,7 @@ function MainPage() {
             <div className='flex flex-col items-start'>
               <h3 className="text-md pt-2 font-display"> Password </h3>
               <input className="bg-[#ad4c4c] rounded-sm w-full" type="password" onChange={e => setPassword(e.target.value)}/>
+              {errorMessage && <div className="text-red-500 text-center font-display">{errorMessage}</div>}
             </div>
             <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display hover:bg-[#ad4c5c] cursor-pointer' onClick={onSubmitPress}>Submit</button>
             <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display hover:bg-[#ad4c5c] cursor-pointer' onClick={onSignUp}>Sign Up</button>
@@ -93,7 +107,6 @@ function MainPage() {
           </div>
         </footer>
       </div>
-
 
       
       </>
