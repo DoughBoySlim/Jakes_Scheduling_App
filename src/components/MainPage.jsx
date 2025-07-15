@@ -96,7 +96,6 @@ function MainPage() {
               {errorMessage && <div className="text-red-500 text-center font-display">{errorMessage}</div>}
             </div>
             <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display hover:bg-[#ad4c5c] cursor-pointer' onClick={onSubmitPress}>Submit</button>
-            <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display hover:bg-[#ad4c5c] cursor-pointer' onClick={onSignUp}>Sign Up</button>
           </div>
         </div>
         </main>

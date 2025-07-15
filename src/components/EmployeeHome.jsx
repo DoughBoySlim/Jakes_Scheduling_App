@@ -1,11 +1,10 @@
 import '../index.css'
+import MyCalendar from './Calendar.jsx';
 function EmployeeHome() {
 
     return (
         <>
-        <div>
-            <h1>Hello From the Employee Homepage</h1>
-        </div>
+            <MyCalendar/>
         </>
     )
 
