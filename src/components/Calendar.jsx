@@ -42,7 +42,7 @@ async function getManagers() {
     const { data, error } = await supabase
     .from('users')
     .select('full_name')
-    .eq('isManager', true)
+    .eq('position', 'Manager')
 
     if(error) {
         console.log(error.message);
@@ -60,7 +60,16 @@ const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 
 export default function MyCalendar() {
 
-    const managers = getManagers();
+    const[managers, setManagers] = useState([]);
+
+    useEffect(() => {
+        async function fetchManagers() {
+            const names = await getManagers();
+            setManagers(names);
+        }
+
+        fetchManagers();
+    }, []);
 
     return (
         <>
@@ -76,9 +85,17 @@ export default function MyCalendar() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className='text-center'>
-                            <td className='p-2 border'>Ethan</td>
-                        </tr>
+                        {managers.map((manager,idx) => {
+                            return (
+                                <tr key={idx} className='text-center'>
+                                    <td className='p-2 border'>{manager}</td>
+                                    <td className='p-2 border'>—</td>
+                                    {days.map(day => (
+                                        <td key={day} className='p-2 border'>—</td>
+                                    ))}
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
             </div>

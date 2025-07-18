@@ -41,14 +41,12 @@ function MainPage() {
 
         else {
             const { data: managerData, error: managerError} = await isManager(email);
-            
-            console.log(managerData?.isManager)
             if(managerError) {
                 setErrorMessage(managerError.message);
                 return;
             }
             else {
-                if(managerData?.isManager === true) {
+                if(managerData?.position === 'Manager') {
                     navigate('/manager-home');
                 }
                 else {
@@ -67,7 +65,7 @@ function MainPage() {
             .insert({
                 employee_id: id,
                 email: email,
-                isManager: false,
+                position: Driver,
                 auth_id: data.user.id 
             });
         }

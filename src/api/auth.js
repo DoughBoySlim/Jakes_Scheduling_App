@@ -25,7 +25,7 @@ export async function signUp(email, password) {
 export async function isManager(username) {
     const { data, error } = await supabase
     .from("users")
-    .select('isManager')
+    .select('position')
     .eq('email', username)
     .single();
     return { data, error };
