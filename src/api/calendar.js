@@ -1,4 +1,5 @@
 import supabase from "../config/supabaseClient";
+import { useEffect, useState } from 'react';
 
 // Supabase Connection To DB
 
@@ -18,16 +19,33 @@ export async function getShiftData() {
 }
 
 
-// Getting A User's Name to print into the Calendar for others to see:
+export  function useCurrentUser() {
 
-export async function getUserFullName(id) {
-    const { data, error } = await supabase
-    .from('users')
-    .select('full_name')
-    .eq('employee_id', id)
-    .single();
+    const[currentUser, setCurrentUser] = useState(null);
 
-    return { data, error };
+    useEffect(() => {
+        async function fetchUser() {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if(!error) {
+                const { data: nameData, error: nameError } = await supabase
+                .from('users')
+                .select('full_name')
+                .eq('email', user.email)
+                .single()
+
+                if(nameError) {
+                    console.error('Error Fetching Name: ', nameError);
+                    setCurrentUser(null);
+                } else {
+                    setCurrentUser(nameData.full_name);
+                }
+            }
+            else console.error(error)
+        };
+    
+        fetchUser();
+    }, []);
+    return currentUser;
 }
 
 // Getting list of Managers to print onto Table

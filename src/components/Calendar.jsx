@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getManagers, getCooks, getCashiers, getShiftLeads, getDrivers } from '../api/calendar.js'
+import { getManagers, getCooks, getCashiers, getShiftLeads, getDrivers, useCurrentUser } from '../api/calendar.js'
 
 // Days of the week for table headers
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -15,6 +15,7 @@ export default function MyCalendar() {
     const [driverNumbers, setDriverPhoneNumbers] = useState([]);
     const [cashiers, setCashiers] = useState([]);
     const [cashierNumbers, setCashierPhoneNumbers] = useState([]);
+    const currentUser = useCurrentUser();
 
     useEffect(() => {
         async function fetchManagers() {
@@ -51,11 +52,11 @@ export default function MyCalendar() {
     }, []);
 
 
-    function printRoles(array, numbers, days) {
+    function printRoles(array, numbers, days, currentUser) {
         return (
             <>
                 {array.map((aIndex, idx) => (
-                    <tr key={`manager-${idx}`} className='text-center'>
+                    <tr key={`placeholder-${idx}`} className={aIndex === currentUser ? 'bg-yellow-100 font-semibold text-center' : 'text-center'}>
                         <td className='p-2 border'>{aIndex}</td>
                         <td className='p-2 border'>{numbers[idx]}</td>
                         {days.map(day => (
@@ -83,7 +84,7 @@ export default function MyCalendar() {
 
                     {managers.length > 0 && (
                         <>
-                            {printRoles(managers, managerNumbers, days)}
+                            {printRoles(managers, managerNumbers, days, currentUser)}
                         </>
                     )}
 
@@ -92,7 +93,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Shift Leads</th>
                             </tr>
-                            {printRoles(shiftLeads, shiftLeadNumbers, days)}
+                            {printRoles(shiftLeads, shiftLeadNumbers, days, currentUser)}
                         </>
                     )}
 
@@ -101,7 +102,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Cooks</th>
                             </tr>
-                            {printRoles(cooks, cookNumbers, days)}
+                            {printRoles(cooks, cookNumbers, days, currentUser)}
                         </>
                     )}
 
@@ -111,7 +112,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Drivers</th>
                             </tr>
-                            {printRoles(drivers, driverNumbers, days)}
+                            {printRoles(drivers, driverNumbers, days, currentUser)}
                         </>
                     )}
 
@@ -120,7 +121,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Cashiers</th>
                             </tr>
-                            {printRoles(cashiers, cashierNumbers, days)}
+                            {printRoles(cashiers, cashierNumbers, days, currentUser)}
                         </>
                     )}
                 </tbody>
