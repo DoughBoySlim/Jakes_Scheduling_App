@@ -48,20 +48,82 @@ export async function getManagers() {
     }
 }
 
-// Getting list of Cooks to print onto Table
+// Getting list of Shift Leads to print onto Table
 
-export async function getCooks() {
+export async function getShiftLeads() {
     const { data, error } = await supabase
     .from('users')
     .select('full_name')
-    .eq('position', 'Manager')
+    .eq('position', 'Shift Lead')
 
     if(error) {
         console.log(error.message);
         return [];
     }
     else {
-        const managers = data.map(user => user.full_name);
-        return managers;
+        const shiftLeads = data.map(user => user.full_name);
+        return shiftLeads;
     }
+}
+
+// Getting list of Cooks to print onto Table
+
+export async function getCooks() {
+    const { data, error } = await supabase
+    .from('users')
+    .select('full_name')
+    .eq('position', 'Cook')
+
+    if(error) {
+        console.log(error.message);
+        return [];
+    }
+    else {
+        const cooks = data.map(user => user.full_name);
+        return cooks;
+    }
+}
+
+// Getting list of Drivers to print onto Table
+
+export async function getDrivers() {
+    const { data, error } = await supabase
+    .from('users')
+    .select('full_name')
+    .eq('position', 'Driver')
+
+    if(error) {
+        console.log(error.message);
+        return [];
+    }
+    else {
+        const drivers = data.map(user => user.full_name);
+        return drivers;
+    }
+}
+
+// Getting list of Cashiers to print onto Table
+
+export async function getCashiers() {
+    const { data, error } = await supabase
+    .from('users')
+    .select('full_name')
+    .eq('position', 'Cashier')
+
+    if(error) {
+        console.log(error.message);
+        return [];
+    }
+    else {
+        const cashiers = data.map(user => user.full_name);
+        return cashiers;
+    }
+}
+
+// Get Phone Numbers of Individuals
+
+export async function getPhoneNumbers() {
+    const { data, error } = await supabase
+    .from('users')
+    .select('phone_number', 'full_name')
 }
