@@ -50,6 +50,23 @@ export default function MyCalendar() {
         fetchCashiers();
     }, []);
 
+
+    function printRoles(array, numbers, days) {
+        return (
+            <>
+                {array.map((aIndex, idx) => (
+                    <tr key={`manager-${idx}`} className='text-center'>
+                        <td className='p-2 border'>{aIndex}</td>
+                        <td className='p-2 border'>{numbers[idx]}</td>
+                        {days.map(day => (
+                            <td key={day} className='p-2 border'>—</td>
+                        ))}
+                    </tr>
+                ))}
+            </>
+        )
+    }
+
     return (
         <div className='m-8'>
             <table className='w-full border-collapse border border-gray-300'>
@@ -66,15 +83,7 @@ export default function MyCalendar() {
 
                     {managers.length > 0 && (
                         <>
-                            {managers.map((manager, idx) => (
-                                <tr key={`manager-${idx}`} className='text-center'>
-                                    <td className='p-2 border'>{manager}</td>
-                                    <td className='p-2 border'>{managerNumbers[idx]}</td>
-                                    {days.map(day => (
-                                        <td key={day} className='p-2 border'>—</td>
-                                    ))}
-                                </tr>
-                            ))}
+                            {printRoles(managers, managerNumbers, days)}
                         </>
                     )}
 
@@ -83,15 +92,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Shift Leads</th>
                             </tr>
-                            {shiftLeads.map((shiftLead, idx) => (
-                                <tr key={`shiftLead-${idx}`} className='text-center'>
-                                    <td className='p-2 border'>{shiftLead}</td>
-                                    <td className='p-2 border'>{shiftLeadNumbers[idx]}</td>
-                                    {days.map(day => (
-                                        <td key={day} className='p-2 border'></td>
-                                    ))}
-                                </tr>
-                            ))}
+                            {printRoles(shiftLeads, shiftLeadNumbers, days)}
                         </>
                     )}
 
@@ -100,15 +101,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Cooks</th>
                             </tr>
-                            {cooks.map((cook, idx) => (
-                                <tr key={`cook-${idx}`} className='text-center'>
-                                    <td className='p-2 border'>{cook}</td>
-                                    <td className='p-2 border'>{cookNumbers[idx]}</td>
-                                    {days.map(day => (
-                                        <td key={day} className='p-2 border'></td>
-                                    ))}
-                                </tr>
-                            ))}
+                            {printRoles(cooks, cookNumbers, days)}
                         </>
                     )}
 
@@ -118,15 +111,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Drivers</th>
                             </tr>
-                            {drivers.map((driver, idx) => (
-                                <tr key={`driver-${idx}`} className='text-center'>
-                                    <td className='p-2 border text-left'>{driver}</td>
-                                    <td className='p-2 border'>{driverNumbers[idx]}</td>
-                                    {days.map(day => (
-                                        <td key={day} className='p-2 border'></td>
-                                    ))}
-                                </tr>
-                            ))}
+                            {printRoles(drivers, driverNumbers, days)}
                         </>
                     )}
 
@@ -135,15 +120,7 @@ export default function MyCalendar() {
                             <tr>
                                 <th className='p-2 border'>Cashiers</th>
                             </tr>
-                            {cashiers.map((cashier, idx) => (
-                                <tr key={`cashier-${idx}`} className='text-center'>
-                                    <td className='p-2 border'>{cashier}</td>
-                                    <td className='p-2 border'>{cashierNumbers[idx]}</td>
-                                    {days.map(day => (
-                                        <td key={day} className='p-2 border'></td>
-                                    ))}
-                                </tr>
-                            ))}
+                            {printRoles(cashiers, cashierNumbers, days)}
                         </>
                     )}
                 </tbody>
