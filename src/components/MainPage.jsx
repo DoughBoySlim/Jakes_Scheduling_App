@@ -12,38 +12,44 @@ function MainPage() {
     const [email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const[errorMessage, setErrorMessage] = useState('');
+    const[id, setId] = useState();
     const navigate = useNavigate();
     
     async function onSubmitPress() {
 
         // Quality of Life Test to see if fields are empty
-        if(email == '' && password == '') {
+        if(!email && !password) {
             setErrorMessage('please fill in your username and password');
             return;
         }
-        else if(email == '') {
+        else if(!email) {
             setErrorMessage('please fill in a username');
             return;
         } 
-        else if(password == '') {
+        else if(!password) {
             setErrorMessage('please fill in a password');
             return;
         }
-
+        
+        // attempt login
         const { data, error } = await signIn(email, password);
 
         if(error) {
             setErrorMessage(error.message);
+            return;
         }
+
         else {
             const { data: managerData, error: managerError} = await isManager(email);
+            
+            console.log(managerData?.isManager)
             if(managerError) {
                 setErrorMessage(managerError.message);
+                return;
             }
             else {
-                if(managerData && managerData.isManager) {
+                if(managerData?.isManager === true) {
                     navigate('/manager-home');
-
                 }
                 else {
                     navigate('/employee-home');
@@ -60,7 +66,7 @@ function MainPage() {
             .from('users')
             .insert({
                 employee_id: id,
-                full_name: email,
+                email: email,
                 isManager: false,
                 auth_id: data.user.id 
             });
@@ -93,9 +99,11 @@ function MainPage() {
             <div className='flex flex-col items-start'>
               <h3 className="text-md pt-2 font-display"> Password </h3>
               <input className="bg-[#ad4c4c] rounded-sm w-full" type="password" onChange={e => setPassword(e.target.value)}/>
+              <input className="bg-[#ad4c4c] rounded-sm w-full" onChange={e => setId(e.target.value)}/>
               {errorMessage && <div className="text-red-500 text-center font-display">{errorMessage}</div>}
             </div>
             <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display hover:bg-[#ad4c5c] cursor-pointer' onClick={onSubmitPress}>Submit</button>
+            <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display hover:bg-[#ad4c5c] cursor-pointer' onClick={onSignUp}>SignUp</button>
           </div>
         </div>
         </main>

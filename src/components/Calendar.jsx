@@ -36,68 +36,53 @@ async function getUserFullName(id) {
     return { data, error };
 }
 
+// Getting list of Managers to print onto Table
 
-const locales = {
-    'en-US': enUS,
-};
+async function getManagers() {
+    const { data, error } = await supabase
+    .from('users')
+    .select('full_name')
+    .eq('isManager', true)
 
-const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales,
-});
+    if(error) {
+        console.log(error.message);
+        return [];
+    }
+    else {
+        const managers = data.map(user => user.full_name);
+        return managers;
+    }
+}
 
-// Hardcoded Events
-const events = [
-    {
-        title: 'Manager',
-        start: new Date(2025, 6, 15, 10, 0),
-        end: new Date(2025, 6, 15, 14, 0),
-    },
-    {
-        title: 'Cook',
-        start: new Date(2025, 6, 16, 10, 0),
-        end: new Date(2025, 6, 16, 14, 0),
-    },
-];
+// creating a day list to put in table header
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-const minTime = new Date();
-minTime.setHours(10,0,0,0);
-const maxTime = new Date();
-maxTime.setHours(21,0,0,0);
 
 export default function MyCalendar() {
 
-    const[calendarView, setCalendarView] = useState(() =>
-        window.innerWidth < 768 ? 'day' : 'week'
-    );
-
-    useEffect(() => {
-        function handleResize() {
-            window.innerWidth < 768 ? setCalendarView('day') : setCalendarView('week');
-        }
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
+    const managers = getManagers();
 
     return (
-        <div className="p-4 m-10">
-            <h2 className="text-xl font-semibold mb-4">My Calendar</h2>
-            <Calendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                style={{ height: 600 }}
-                defaultView={calendarView}
-                views={[calendarView]}
-                min={minTime}
-                max={maxTime}
-            />
-        </div>
-    );
+        <>
+            <div className='m-8'>
+                <table className='w-full'>
+                    <thead>
+                        <tr>
+                            <th className='p-2 border'>Manager</th>
+                            <th className='p-2 border'>Phone #'s</th>
+                            {days.map(day => (
+                                <th key={day} className='p-2 border text-center'>{day}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className='text-center'>
+                            <td className='p-2 border'>Ethan</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </>
+    )
 }

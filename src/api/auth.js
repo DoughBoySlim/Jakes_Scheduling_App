@@ -23,11 +23,10 @@ export async function signUp(email, password) {
 
 // Writing a function to check if the user is a manager from the DB column 'isManager'
 export async function isManager(username) {
-    const { data, error } = supabase
+    const { data, error } = await supabase
     .from("users")
     .select('isManager')
-    .eq('full_name', username)
+    .eq('email', username)
     .single();
-
     return { data, error };
 }
