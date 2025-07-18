@@ -35,16 +35,23 @@ export async function getUserFullName(id) {
 export async function getManagers() {
     const { data, error } = await supabase
     .from('users')
-    .select('full_name')
+    .select('full_name, phone_number')
     .eq('position', 'Manager')
 
     if(error) {
         console.log(error.message);
-        return [];
+        return {
+            manager: [],
+            numbers: []
+        };
     }
     else {
         const managers = data.map(user => user.full_name);
-        return managers;
+        const numbers = data.map(user => user.phone_number);
+        return {
+            managers,
+            numbers
+        };
     }
 }
 
@@ -53,16 +60,23 @@ export async function getManagers() {
 export async function getShiftLeads() {
     const { data, error } = await supabase
     .from('users')
-    .select('full_name')
+    .select('full_name, phone_number')
     .eq('position', 'Shift Lead')
 
     if(error) {
         console.log(error.message);
-        return [];
+        return {
+            shiftLeads: [],
+            numbers: []
+        };
     }
     else {
         const shiftLeads = data.map(user => user.full_name);
-        return shiftLeads;
+        const numbers = data.map(user => user.phone_number);
+        return {
+            shiftLeads,
+            numbers
+        };
     }
 }
 
@@ -71,16 +85,23 @@ export async function getShiftLeads() {
 export async function getCooks() {
     const { data, error } = await supabase
     .from('users')
-    .select('full_name')
+    .select('full_name, phone_number')
     .eq('position', 'Cook')
 
     if(error) {
         console.log(error.message);
-        return [];
+        return {
+            cooks: [],
+            numbers: []
+        };
     }
     else {
         const cooks = data.map(user => user.full_name);
-        return cooks;
+        const numbers = data.map(user => user.phone_number);
+        return {
+            cooks,
+            numbers
+        };
     }
 }
 
@@ -89,16 +110,23 @@ export async function getCooks() {
 export async function getDrivers() {
     const { data, error } = await supabase
     .from('users')
-    .select('full_name')
+    .select('full_name, phone_number')
     .eq('position', 'Driver')
 
     if(error) {
         console.log(error.message);
-        return [];
+        return {
+            drivers: [],
+            numbers: []
+        };
     }
     else {
         const drivers = data.map(user => user.full_name);
-        return drivers;
+        const numbers = data.map(user => user.phone_number);
+        return {
+            drivers,
+            numbers
+        };
     }
 }
 
@@ -107,23 +135,22 @@ export async function getDrivers() {
 export async function getCashiers() {
     const { data, error } = await supabase
     .from('users')
-    .select('full_name')
+    .select('full_name, phone_number')
     .eq('position', 'Cashier')
 
     if(error) {
         console.log(error.message);
-        return [];
+        return {
+            cashiers: [],
+            numbers: []
+        };
     }
     else {
         const cashiers = data.map(user => user.full_name);
-        return cashiers;
+        const numbers = data.map(user => user.phone_number);
+        return {
+            cashiers,
+            numbers
+        };
     }
-}
-
-// Get Phone Numbers of Individuals
-
-export async function getPhoneNumbers() {
-    const { data, error } = await supabase
-    .from('users')
-    .select('phone_number', 'full_name')
 }
