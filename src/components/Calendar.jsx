@@ -69,7 +69,7 @@ export default function MyCalendar() {
     }
 
     return (
-        <div className='m-8'>
+        <div className='m-8 overflow-x-auto'>
             <table className='w-full border-collapse border border-gray-300'>
                 <thead>
                     <tr>

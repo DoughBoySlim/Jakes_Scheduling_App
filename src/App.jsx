@@ -10,8 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage/>}/>
-        <Route path='/employee-home' element={<EmployeeHome/>}/>
-        <Route path='/manager-home' element={<ManagerHome/>}/>
+        <Route path='/employee_home' element={<EmployeeHome/>}/>
+        <Route path='/manager_home' element={<ManagerHome/>}/>
       </Routes>
     </BrowserRouter>
   )

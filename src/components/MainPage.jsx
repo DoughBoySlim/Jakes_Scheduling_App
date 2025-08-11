@@ -47,10 +47,10 @@ function MainPage() {
             }
             else {
                 if(managerData?.position === 'Manager') {
-                    navigate('/manager-home');
+                    navigate('/manager_home');
                 }
                 else {
-                    navigate('/employee-home');
+                    navigate('/employee_home');
                 }
             }
         }
@@ -97,7 +97,6 @@ function MainPage() {
             <div className='flex flex-col items-start'>
               <h3 className="text-md pt-2 font-display"> Password </h3>
               <input className="bg-[#ad4c4c] rounded-sm w-full" type="password" onChange={e => setPassword(e.target.value)}/>
-              <input className="bg-[#ad4c4c] rounded-sm w-full" onChange={e => setId(e.target.value)}/>
               {errorMessage && <div className="text-red-500 text-center font-display">{errorMessage}</div>}
             </div>
             <button className='p-3 bg-[#ad4c4c] rounded-sm border mx-auto my-6 border-black text-white font-display hover:bg-[#ad4c5c] cursor-pointer' onClick={onSubmitPress}>Submit</button>
