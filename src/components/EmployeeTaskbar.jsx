@@ -11,7 +11,7 @@ function EmployeeTaskBar() {
 
       {/* Text container fills remaining space and centers text */}
       <div className="flex-grow flex justify-center">
-        <h1 className="text-white whitespace-nowrap">
+        <h1 className="text-white whitespace-nowrap text-2xl font-serif">
           Hello, {currentUser}!
         </h1>
       </div>

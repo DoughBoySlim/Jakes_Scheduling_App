@@ -112,7 +112,6 @@ function MainPage() {
         </footer>
       </div>
 
-      
       </>
     )
 

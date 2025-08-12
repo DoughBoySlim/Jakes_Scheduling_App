@@ -30,3 +30,7 @@ export async function isManager(username) {
     .single();
     return { data, error };
 }
+
+export async function getEmployeeId() {
+    
+}
