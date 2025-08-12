@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { showAllRequestInfo } from "../api/request.js";
+import { format, parseISO } from 'date-fns';
 
 function EmployeeRequestInfo() {
 
@@ -23,16 +24,17 @@ function EmployeeRequestInfo() {
         return <h1>Loading...</h1>
     }
     
-    function changeDateLayout() {
-        console.log(requestInfo);
+    function formatDateToMMDD(dateString) {
+        const date = parseISO(dateString)
+        return format(new Date(date), 'MM/dd');
     }
 
     return (
         <>
             {requestInfo.map((req => (
                 <div key={req.id}>
-                    <p>{req.start_date}</p>
-                    <p>{req.end_date}</p>
+                    <p>{formatDateToMMDD(req.start_date)}</p>
+                    <p>{formatDateToMMDD(req.end_date)}</p>
                     <p>{req.status}</p>
                 </div>
             )))}
