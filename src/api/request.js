@@ -36,10 +36,17 @@ export async function showAllRequestInfo() {
     return data;
 }
 
-export async function addRequest() {
+export async function addRequest(startDate, endDate) {
     const userId = await getCurrentUserId();
 
-    const { data, error } = await supabase
+    await supabase
     .from('requests')
-    .insert()
+    .insert([
+        {
+            employee_id: userId,
+            start_date: startDate,
+            end_date: endDate,
+        }
+    ]);
+
 }
