@@ -47,10 +47,10 @@ function MainPage() {
             }
             else {
                 if(managerData?.position === 'Manager') {
-                    navigate('/manager_home');
+                    navigate('/manager-home');
                 }
                 else {
-                    navigate('/employee_home');
+                    navigate('/employee-home');
                 }
             }
         }

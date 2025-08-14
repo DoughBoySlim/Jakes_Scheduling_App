@@ -6,15 +6,14 @@ import EmpTaskBar from './EmployeeTaskbar.jsx';
 
 function EmployeeHome() {
   return (
-    <div className="min-h-screen flex flex-col w-full">
+    <div className="min-h-screen flex flex-col w-full bg-[#ececec]">
       <EmpTaskBar />
       <EmployeeButtons/>
       <main className="flex-grow max-w-screen-xl mx-auto w-full px-4">
         <MyCalendar />
+        <EmployeeRequestInfo/>
       </main>
 
-      <h1>Request Off Information</h1>
-      <EmployeeRequestInfo/>
     </div>
   );
 }

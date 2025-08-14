@@ -35,3 +35,11 @@ export async function showAllRequestInfo() {
 
     return data;
 }
+
+export async function addRequest() {
+    const userId = await getCurrentUserId();
+
+    const { data, error } = await supabase
+    .from('requests')
+    .insert()
+}

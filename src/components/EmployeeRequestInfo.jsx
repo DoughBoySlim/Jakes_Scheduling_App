@@ -19,9 +19,8 @@ function EmployeeRequestInfo() {
         fetchRequestData();
     }, []);
 
-    
     if(!requestInfo) {
-        return <h1>Loading...</h1>
+        return <h1 className='text-center text-2xl font-serif'>No Pending Requests!</h1>
     }
     
     function formatDateToMMDD(dateString) {
@@ -30,14 +29,32 @@ function EmployeeRequestInfo() {
     }
 
     return (
-        <>
-            {requestInfo.map((req => (
-                <div key={req.id}>
-                    <p>{formatDateToMMDD(req.start_date)}</p>
-                    <p>{formatDateToMMDD(req.end_date)}</p>
-                    <p>{req.status}</p>
-                </div>
-            )))}
+        <> 
+            <div className='text-center'>
+                <h1 className='text-center text-2xl font-serif'>Request Off Information</h1>
+            </div>
+            <div className='m-8 overflow-x-auto overflow-y-auto'>
+                <table className='w-full border-collapse border border-gray-300'>
+                    <thead>
+                        <tr>
+                            <th className='p-2 border'>Request Number</th>
+                            <th className='p-2 border'>Start Day</th>
+                            <th className='p-2 border'>End Day</th>
+                            <th className='p-2 border'>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {requestInfo.map((req) => (
+                            <tr key={req.id}>
+                                <td className="p-2 border text-center">{req.request_id}</td>
+                                <td className="p-2 border text-center">{formatDateToMMDD(req.start_date)}</td>
+                                <td className="p-2 border text-center">{formatDateToMMDD(req.end_date)}</td>
+                                <td className="p-2 border text-center">{req.status}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
