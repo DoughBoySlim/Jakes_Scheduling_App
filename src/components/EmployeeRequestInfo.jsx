@@ -45,7 +45,7 @@ function EmployeeRequestInfo() {
                     </thead>
                     <tbody>
                         {requestInfo.map((req) => (
-                            <tr key={req.id}>
+                            <tr key={req.request_id}>
                                 <td className="p-2 border text-center">{req.request_id}</td>
                                 <td className="p-2 border text-center">{formatDateToMMDD(req.start_date)}</td>
                                 <td className="p-2 border text-center">{formatDateToMMDD(req.end_date)}</td>
