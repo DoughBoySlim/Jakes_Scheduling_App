@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getManagers, getCooks, getCashiers, getShiftLeads, getDrivers, useCurrentUser } from '../api/calendar.js'
+import { format, startOfWeek, addDays, setWeek } from 'date-fns'
 
 // Days of the week for table headers
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -16,6 +17,7 @@ export default function MyCalendar() {
     const [cashiers, setCashiers] = useState([]);
     const [cashierNumbers, setCashierPhoneNumbers] = useState([]);
     const currentUser = useCurrentUser();
+    const [weekStart, setWeekStart] = useState(startOfWeek(new Date(), { weekStartsOn: 0}));
 
     useEffect(() => {
         async function fetchManagers() {
@@ -68,6 +70,14 @@ export default function MyCalendar() {
         )
     }
 
+    function nextWeek() {
+        setWeekStart(prev => addDays(prev, 7));
+    }
+
+    function prevWeek() {
+        setWeekStart(prev => addDays(prev, -7));
+    }
+
     return (
         <div className='m-8 overflow-x-auto'>
             <table className='w-full border-collapse border border-gray-300'>
@@ -75,9 +85,14 @@ export default function MyCalendar() {
                     <tr>
                         <th className='p-2 border'>Managers</th>
                         <th className='p-2 border'>Phone #</th>
-                        {days.map(day => (
-                            <th key={day} className='p-2 border text-center'>{day}</th>
-                        ))}
+                        {days.map((day,index) => {
+                            const date = addDays(weekStart, index);
+                            return (
+                                <th key={day} className='p-2 border text-center'>
+                                    {day} {format(date, 'd')}
+                                </th>
+                            );
+                        })}
                     </tr>
                 </thead>
                 <tbody>
